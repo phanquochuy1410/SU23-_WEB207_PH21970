@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="BaiTạp.css">
+</head>
+
+<body ng-app="angular-baiTap" class="khung">
+    <div ng-controller='baitapController' style="width: 1000px; height: 500px;border: 1px solid black;" class="a">
+        <h2>
+            Họ Tên : Phan Quốc Huy
+        </h2>
+        <h2>MSV : PH21970</h2>
+        <button class="button" title="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="uesr in users">
+                    <th scope="col">{{uesr.id}}</th>
+                    <td>{{uesr.name}}</td>
+                    <td>{{uesr.mota}}</td>
+                    <td><img src="{{uesr.link}}" alt="" width="50px" height="70px"></td>
+                </tr>
+            </tbody>
+
+            <script>
+                function reder() {
+                    table = `
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Ảnh</th>
+                </tr>
+            `
+                    for (let i = 0; i < data.length; i++) {
+                        table += ` <tr>
+                    <th scope="row">i++</th>
+                    <td>${data[i].name}</td>
+                    <td>${data[i].mota}</td>
+                    <td><img src="${data[i].link}" alt=""></td>
+                </tr>
+              
+                `
+                    }
+                    document.getElementById("render").innerHTML = table
+                }
+            </script>
+        </table>
+    </div>
+    <script src="./angular.min.js"></script>
+    <script>
+        var app = angular.module('angular-baiTap', []);
+
+        app.controller('baitapController', function ($scope) {
+            $scope.users = [
+                { id: 1, name: 'Phan Quốc Huy', mota: 'Ngủ', link: 'https://khoinguonsangtao.vn/wp-content/uploads/2022/08/hinh-anh-anime-nam.jpg' }
+            ];
+        });
+    </script>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm danh sách</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên ảnh</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Mô tả</label>
+                            <input type="text" class="form-control" id="mota" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Link ảnh</label>
+                            <input type="text" class="form-control" id="link" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" id="add" onclick="add_data();" class="btn btn-primary">Thêm </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = [];
+        function add_data() {
+            var name = document.getElementById("name").value;
+            var mota = document.getElementById("mota").value;
+            var link = document.getElementById("link").value;
+
+            var item = {
+                name: name,
+                mota: mota,
+                link: link
+            };
+            data.push(item);
+
+            reder();
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
